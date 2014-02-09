@@ -14,9 +14,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.SECOND);
+			return next(initialDate, multiplier, Calendar.SECOND);
 		}
 		
 	},
@@ -25,9 +25,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.MINUTE);
+			return next(initialDate, multiplier, Calendar.MINUTE);
 		}
 		
 	},
@@ -36,9 +36,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.HOUR);
+			return next(initialDate, multiplier, Calendar.HOUR);
 		}
 		
 	},
@@ -47,9 +47,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.DAY_OF_YEAR);
+			return next(initialDate, multiplier, Calendar.DAY_OF_YEAR);
 		}
 		
 	},
@@ -58,9 +58,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.WEEK_OF_YEAR);
+			return next(initialDate, multiplier, Calendar.WEEK_OF_YEAR);
 		}
 		
 	},
@@ -69,7 +69,7 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
 			
 			GregorianCalendar initialCalendar = new GregorianCalendar();
@@ -89,9 +89,9 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.MONTH);
+			return next(initialDate, multiplier, Calendar.MONTH);
 		}
 		
 	},
@@ -100,16 +100,16 @@ public enum ScheduleScope
 	{
 
 		@Override
-		public Date incrementDate(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier)
 		{
-			return incrementDate(initialDate, multiplier, Calendar.YEAR);
+			return next(initialDate, multiplier, Calendar.YEAR);
 		}
 		
 	};
 	
-	public abstract Date incrementDate(Date initialDate, int multiplier);
+	public abstract Date next(Date initialDate, int multiplier);
 	
-	protected Date incrementDate(Date initialDate, int multiplier, int calendarField)
+	protected Date next(Date initialDate, int multiplier, int calendarField)
 	{
 		
 		GregorianCalendar calendar = new GregorianCalendar();
