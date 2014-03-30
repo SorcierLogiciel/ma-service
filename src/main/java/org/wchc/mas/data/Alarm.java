@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -15,10 +16,10 @@ import lombok.Setter;
 public class Alarm implements BaseEntity
 {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter
 	@Setter
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Getter
@@ -32,6 +33,7 @@ public class Alarm implements BaseEntity
 	@Getter
 	@Setter
 	@OneToMany
+	@JoinColumn(name="ALARM_ID", referencedColumnName="id")
 	private List<Schedule> schedules; 
 	
 	

@@ -1,19 +1,21 @@
 package org.wchc.mas.data;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.wchc.mas.enums.ScheduleScope;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import org.wchc.mas.enums.ScheduleScope;
+
 @Entity
-public abstract class Schedule implements BaseEntity
+public class Schedule implements BaseEntity
 {
 	
 	@Getter
@@ -24,15 +26,16 @@ public abstract class Schedule implements BaseEntity
 	
 	@Getter
 	@Setter
+	@Enumerated(EnumType.STRING)
 	private ScheduleScope scheduleScope;
 	
 	@Getter
 	@Setter
-	private Date creationTime;
+	private Timestamp creationTime;
 	
 	@Getter
 	@Setter
-	private Date nextEventTime;
+	private Timestamp nextEventTime;
 	
 	@Getter
 	@Setter
