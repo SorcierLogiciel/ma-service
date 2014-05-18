@@ -13,7 +13,10 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import lombok.AllArgsConstructor;
 
-
+/**
+ * 
+ * @author Joshua
+ */
 public enum EntityEvent
 {
 	
@@ -21,6 +24,10 @@ public enum EntityEvent
 	UPDATED,
 	DELETED;
 	
+	/**
+	 * 
+	 * @author Joshua
+	 */
 	@javax.inject.Qualifier
 	@Retention(RUNTIME)
 	@Target({TYPE, METHOD, FIELD, PARAMETER})
@@ -29,6 +36,10 @@ public enum EntityEvent
 		EntityEvent value();
 	}
 	
+	/**
+	 * 
+	 * @author Joshua
+	 */
 	@AllArgsConstructor
 	@SuppressWarnings("all")
 	public static final class Qualifier extends AnnotationLiteral<Annotation> implements Annotation

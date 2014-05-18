@@ -4,6 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * 
+ * @author Joshua
+ */
 public enum ScheduleScope
 {
 	
@@ -107,8 +111,21 @@ public enum ScheduleScope
 		
 	};
 	
+	/**
+	 * 
+	 * @param initialDate
+	 * @param multiplier
+	 * @return
+	 */
 	public abstract Date next(Date initialDate, int multiplier);
 	
+	/**
+	 * 
+	 * @param initialDate
+	 * @param multiplier
+	 * @param calendarField
+	 * @return
+	 */
 	protected Date next(Date initialDate, int multiplier, int calendarField)
 	{
 		

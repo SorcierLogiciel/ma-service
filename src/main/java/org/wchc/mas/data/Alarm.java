@@ -12,6 +12,10 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ * @author Joshua
+ */
 @Entity
 public class Alarm implements BaseEntity
 {

@@ -9,6 +9,10 @@ import javax.persistence.PersistenceContext;
 import org.wchc.mas.data.BaseEntity;
 import org.wchc.mas.enums.EntityEvent;
 
+/**
+ * 
+ * @author Joshua
+ */
 @Singleton
 public class EntityManagerAdapter
 {
@@ -19,6 +23,11 @@ public class EntityManagerAdapter
 	@PersistenceContext(unitName = "MusicAlarmService")
 	private EntityManager em;
 	
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public <T extends BaseEntity> T create(T entity)
 	{
 		
@@ -28,6 +37,11 @@ public class EntityManagerAdapter
 		
 	}
 	
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public <T extends BaseEntity> T update(T entity)
 	{
 		
@@ -37,6 +51,11 @@ public class EntityManagerAdapter
 		
 	}
 	
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public <T extends BaseEntity> T delete(T entity)
 	{
 		

@@ -14,6 +14,10 @@ import lombok.Setter;
 
 import org.wchc.mas.enums.ScheduleScope;
 
+/**
+ * 
+ * @author Joshua
+ */
 @Entity
 public class Schedule implements BaseEntity
 {
