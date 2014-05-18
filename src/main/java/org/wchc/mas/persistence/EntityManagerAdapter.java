@@ -1,10 +1,14 @@
 package org.wchc.mas.persistence;
 
+import java.util.List;
+
 import javax.ejb.Singleton;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.wchc.mas.data.BaseEntity;
 import org.wchc.mas.enums.EntityEvent;
@@ -22,6 +26,32 @@ public class EntityManagerAdapter
 	
 	@PersistenceContext(unitName = "MusicAlarmService")
 	private EntityManager em;
+	
+	/**
+	 * 
+	 * @param entityClass
+	 * @return
+	 */
+	public <T extends BaseEntity> List<T> findAll(Class<T> entityClass)
+	{
+		
+		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(entityClass);
+		Root<T> root = query.from(entityClass);
+		query.select(root);
+		return em.createQuery(query).getResultList();
+		
+	}
+	
+	/**
+	 * 
+	 * @param entityClass
+	 * @param id
+	 * @return
+	 */
+	public <T extends BaseEntity> T findById(Class<T> entityClass, int id)
+	{
+		return em.find(entityClass, id);	
+	}
 	
 	/**
 	 * 
