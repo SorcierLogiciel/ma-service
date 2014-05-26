@@ -1,4 +1,4 @@
-package org.wchc.mas.enums;
+package org.westcoasthonorcamp.mas.enums;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

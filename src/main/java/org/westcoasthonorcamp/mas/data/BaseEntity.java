@@ -1,4 +1,4 @@
-package org.wchc.mas.data;
+package org.westcoasthonorcamp.mas.data;
 
 /**
  * 

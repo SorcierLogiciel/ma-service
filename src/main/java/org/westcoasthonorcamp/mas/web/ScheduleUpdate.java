@@ -1,4 +1,4 @@
-package org.wchc.mas.web;
+package org.westcoasthonorcamp.mas.web;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.wchc.mas.data.Alarm;
-import org.wchc.mas.data.Schedule;
-import org.wchc.mas.enums.ScheduleScope;
-import org.wchc.mas.persistence.EntityManagerAdapter;
+import org.westcoasthonorcamp.mas.data.Alarm;
+import org.westcoasthonorcamp.mas.data.Schedule;
+import org.westcoasthonorcamp.mas.enums.ScheduleScope;
+import org.westcoasthonorcamp.mas.persistence.PersistenceManager;
 
 /**
  * Servlet implementation class ScheduleUpdate
@@ -27,7 +27,7 @@ public class ScheduleUpdate extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private EntityManagerAdapter ema;
+	private PersistenceManager ema;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

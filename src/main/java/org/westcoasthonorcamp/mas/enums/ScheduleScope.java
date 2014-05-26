@@ -1,4 +1,4 @@
-package org.wchc.mas.enums;
+package org.westcoasthonorcamp.mas.enums;
 
 import java.util.Calendar;
 import java.util.Date;

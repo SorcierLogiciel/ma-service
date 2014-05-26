@@ -1,4 +1,4 @@
-package org.wchc.mas.web;
+package org.westcoasthonorcamp.mas.web;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.wchc.mas.data.Alarm;
-import org.wchc.mas.persistence.EntityManagerAdapter;
+import org.westcoasthonorcamp.mas.data.Alarm;
+import org.westcoasthonorcamp.mas.persistence.PersistenceManager;
 
 /**
  * Servlet implementation class Upload
@@ -30,7 +30,7 @@ public class Upload extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private EntityManagerAdapter ema;
+	private PersistenceManager ema;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

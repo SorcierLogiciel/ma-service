@@ -1,4 +1,4 @@
-package org.wchc.mas.persistence;
+package org.westcoasthonorcamp.mas.persistence;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.wchc.mas.data.BaseEntity;
-import org.wchc.mas.enums.EntityEvent;
+import org.westcoasthonorcamp.mas.data.BaseEntity;
+import org.westcoasthonorcamp.mas.enums.EntityEvent;
 
 /**
  * 
  * @author Joshua
  */
 @Singleton
-public class EntityManagerAdapter
+public class PersistenceManager
 {
 	
 	@Inject

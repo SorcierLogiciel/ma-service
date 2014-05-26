@@ -1,4 +1,4 @@
-package org.wchc.mas.data;
+package org.westcoasthonorcamp.mas.data;
 
 import java.sql.Timestamp;
 
@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.wchc.mas.enums.ScheduleScope;
+import org.westcoasthonorcamp.mas.enums.ScheduleScope;
 
 /**
  * 
