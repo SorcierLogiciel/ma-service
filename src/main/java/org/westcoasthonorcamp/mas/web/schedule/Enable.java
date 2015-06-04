@@ -2,7 +2,6 @@ package org.westcoasthonorcamp.mas.web.schedule;
 
 import java.io.IOException;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ public class Enable extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 	
 	@Inject
 	private MusicScheduler ms;
@@ -39,10 +38,10 @@ public class Enable extends HttpServlet
 		try
 		{
 			
-			Schedule schedule = pm.get().findById(Schedule.class, Integer.parseInt(request.getParameter("scheduleId")));
+			Schedule schedule = pm.findById(Schedule.class, Integer.parseInt(request.getParameter("scheduleId")));
 			boolean wasEnabled = schedule.isEnabled();
 			schedule.setEnabled(request.getParameter("enable") != null);
-			pm.get().update(schedule);
+			pm.update(schedule);
 			
 			if(schedule.isEnabled() && !wasEnabled)
 			{

@@ -9,7 +9,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -37,7 +36,7 @@ public class Upload extends HttpServlet
 	private static final List<String> EXTENSIONS = new ArrayList<>();
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException
@@ -80,7 +79,7 @@ public class Upload extends HttpServlet
 		    Music music = new Music();
 		    music.setLocation(uploadFile.toString());
 		    music.setName(name != null && name.trim().length() > 0 ? name : fileName);
-		    pm.get().create(music);
+		    pm.create(music);
 		    
 		    request.setAttribute("musicId", music.getId());
 		    request.setAttribute("name", music.getName());

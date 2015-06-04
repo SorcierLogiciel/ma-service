@@ -21,7 +21,6 @@ import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import javazoom.jl.decoder.JavaLayerException;
@@ -40,7 +39,7 @@ public class MusicScheduler
 {
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 	
 	@Resource
 	private TimerService timerService;
@@ -52,7 +51,7 @@ public class MusicScheduler
 	@PostConstruct
 	private void init()
 	{
-		for(Schedule s : pm.get().findAll(Schedule.class))
+		for(Schedule s : pm.findAll(Schedule.class))
 		{
 			registerMusic(new StandardMusic(s.getMusic().getId(), s.getId()));
 		}

@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class Home extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,9 +45,9 @@ public class Home extends HttpServlet
 			
 		});
 				
-		schedules.addAll(pm.get().findAll(Schedule.class));
+		schedules.addAll(pm.findAll(Schedule.class));
 		request.setAttribute("schedules", schedules);
-		request.setAttribute("musics", pm.get().findAll(Music.class));
+		request.setAttribute("musics", pm.findAll(Music.class));
 		request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
 	}

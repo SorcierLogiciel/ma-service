@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class View extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +38,7 @@ public class View extends HttpServlet
 		{
 			
 			int musicId = Integer.parseInt(request.getParameter("musicId"));
-			Music music = pm.get().findById(Music.class, musicId);
+			Music music = pm.findById(Music.class, musicId);
 			
 			if(music == null)
 			{

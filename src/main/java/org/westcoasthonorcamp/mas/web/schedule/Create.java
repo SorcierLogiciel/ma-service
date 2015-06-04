@@ -6,7 +6,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class Create extends HttpServlet
 	private MusicScheduler ms;
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +42,7 @@ public class Create extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		
-		request.setAttribute("musics", pm.get().findAll(Music.class));
+		request.setAttribute("musics", pm.findAll(Music.class));
 		request.setAttribute("scopes", ScheduleScope.values());
 		request.getRequestDispatcher("/WEB-INF/schedule/create.jsp").forward(request, response);
 		
@@ -58,7 +57,7 @@ public class Create extends HttpServlet
 		try
 		{
 			
-			Music music = pm.get().findById(Music.class, Integer.parseInt(request.getParameter("selectedMusic")));
+			Music music = pm.findById(Music.class, Integer.parseInt(request.getParameter("selectedMusic")));
 			Schedule schedule = new Schedule();
 			schedule.setName(request.getParameter("name"));
 			schedule.setScheduleScope(Enum.valueOf(ScheduleScope.class, request.getParameter("selectedScope")));
@@ -95,9 +94,9 @@ public class Create extends HttpServlet
 				throw new IllegalArgumentException("Selected Music is not available");
 			}
 			
-			pm.get().create(schedule);
+			pm.create(schedule);
 			schedule.setMusic(music);
-			pm.get().update(schedule);
+			pm.update(schedule);
 			
 			if(schedule.isEnabled())
 			{

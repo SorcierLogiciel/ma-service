@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class Delete extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private Instance<PersistenceManager> pm;
+	private PersistenceManager pm;
 	
 	@Inject
 	private MusicScheduler ms;
@@ -41,13 +40,13 @@ public class Delete extends HttpServlet
 		try
 		{
 			
-			Music music = pm.get().findById(Music.class, Integer.parseInt(request.getParameter("musicId")));
+			Music music = pm.findById(Music.class, Integer.parseInt(request.getParameter("musicId")));
 			Files.deleteIfExists(Paths.get(music.getLocation()));
 			for(Schedule schedule : music.getSchedules())
 			{
 				ms.unregisterMusic(schedule.getId());
 			}
-			pm.get().delete(music);
+			pm.delete(music);
 			response.sendRedirect(getServletContext().getContextPath() + "/home");
 			
 		}
