@@ -3,113 +3,46 @@ package org.westcoasthonorcamp.mas.enums;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 
  * @author Joshua
  */
+@AllArgsConstructor
 public enum ScheduleScope
 {
 	
-	//TODO: Add initialization methods for server start
-	//TODO: Add tests to verify increment calculations
-	
-	SECOND
+	NONE(0, "None", "None")
 	{
-
+		
 		@Override
-		public Date next(Date initialDate, int multiplier)
+		public Date next(Date initialDate, int multiplier, AtomicInteger limit)
 		{
-			return next(initialDate, multiplier, Calendar.SECOND);
+			return initialDate;
 		}
 		
 	},
 	
-	MINUTE
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.MINUTE);
-		}
-		
-	},
+	SECOND(Calendar.SECOND, "Second", "Seconds"),
+	MINUTE(Calendar.MINUTE, "Minute", "Minutes"),
+	HOUR(Calendar.HOUR, "Hour", "Hours"),
+	DAY(Calendar.DAY_OF_YEAR, "Day", "Days"),
+	WEEK(Calendar.WEEK_OF_YEAR, "Week", "Weeks"),	
+	MONTH(Calendar.MONTH, "Month", "Months"),
+	YEAR(Calendar.YEAR, "Year", "Years");
 	
-	HOUR
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.HOUR);
-		}
-		
-	},
+	@Getter
+	private final int calendarField;
 	
-	DAY
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.DAY_OF_YEAR);
-		}
-		
-	},
+	@Getter
+	private final String label;
 	
-	WEEK
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.WEEK_OF_YEAR);
-		}
-		
-	},
-	
-	MONTH_DAY_OF_WEEK
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			
-			GregorianCalendar initialCalendar = new GregorianCalendar();
-			initialCalendar.setTime(initialDate);
-			GregorianCalendar resultCalendar = new GregorianCalendar();
-			resultCalendar.setTime(initialDate);
-			resultCalendar.add(Calendar.MONTH, multiplier);
-			resultCalendar.set(Calendar.WEEK_OF_MONTH, initialCalendar.get(Calendar.WEEK_OF_MONTH));
-			resultCalendar.set(Calendar.DAY_OF_WEEK,  initialCalendar.get(Calendar.DAY_OF_WEEK));
-			return initialCalendar.getTime();
-			
-		}
-		
-	},
-	
-	MONTH_DAY_OF_MONTH
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.MONTH);
-		}
-		
-	},
-	
-	YEAR
-	{
-
-		@Override
-		public Date next(Date initialDate, int multiplier)
-		{
-			return next(initialDate, multiplier, Calendar.YEAR);
-		}
-		
-	};
+	@Getter
+	private final String labelPlural;
 	
 	/**
 	 * 
@@ -117,21 +50,20 @@ public enum ScheduleScope
 	 * @param multiplier
 	 * @return
 	 */
-	public abstract Date next(Date initialDate, int multiplier);
-	
-	/**
-	 * 
-	 * @param initialDate
-	 * @param multiplier
-	 * @param calendarField
-	 * @return
-	 */
-	protected Date next(Date initialDate, int multiplier, int calendarField)
+	public Date next(Date initialDate, int multiplier, AtomicInteger limit)
 	{
-		
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTime(initialDate);
-		calendar.add(calendarField, multiplier);
+		Date now = new Date();
+		while(calendar.getTime().before(now) && (limit == null || limit.get() > 0))
+		{
+			calendar.add(calendarField, multiplier);
+			if(limit != null)
+			{
+				limit.decrementAndGet();
+			}
+		}
 		return calendar.getTime();
 		
 	}

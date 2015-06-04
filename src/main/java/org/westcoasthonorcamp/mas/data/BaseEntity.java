@@ -1,10 +1,12 @@
 package org.westcoasthonorcamp.mas.data;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Joshua
  */
-public interface BaseEntity
+public interface BaseEntity extends Serializable
 {
 	
 	/**

@@ -21,6 +21,18 @@
 		<version>0.0.5</version>
 		<scope>compile</scope>
   	</dependency>
+  	<dependency>
+	  	<groupId>se.hirt.pi</groupId>
+		<artifactId>adafruitlcd</artifactId>
+		<version>1.0.0</version>
+		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+	  	<groupId>net.javazoom</groupId>
+		<artifactId>jl</artifactId>
+		<version>1.0.1</version>
+		<scope>compile</scope>
+  	</dependency>
   </dependencies>
   
 </project>

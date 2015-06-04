@@ -2,7 +2,7 @@ package org.westcoasthonorcamp.mas.persistence;
 
 import java.util.List;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ import org.westcoasthonorcamp.mas.enums.EntityEvent;
  * 
  * @author Joshua
  */
-@Singleton
+@Stateless
 public class PersistenceManager
 {
 	
@@ -37,7 +37,7 @@ public class PersistenceManager
 		
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(entityClass);
 		Root<T> root = query.from(entityClass);
-		query.select(root);
+		query.select(root).orderBy(em.getCriteriaBuilder().asc(root.get("id")));
 		return em.createQuery(query).getResultList();
 		
 	}
@@ -89,7 +89,7 @@ public class PersistenceManager
 	public <T extends BaseEntity> T delete(T entity)
 	{
 		
-		em.remove(entity);
+		em.remove(em.merge(entity));
 		fireDelete(entity);
 		return entity;
 		
