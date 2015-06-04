@@ -47,7 +47,7 @@ public class LocationBeacon
 		
 			if(address != null && !address.isEmpty() && port != 0)
 			{
-				serverUrl = new String(address + ":" + port + "/MusicAlarmService/rest").getBytes();
+				serverUrl = new String("http://" + address + ":" + port + "/MusicAlarmService/rest").getBytes();
 				timerService.createTimer(0, 5000, null);
 			}
 			else
