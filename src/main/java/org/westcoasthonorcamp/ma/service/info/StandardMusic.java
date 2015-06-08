@@ -8,8 +8,8 @@ import javax.enterprise.inject.spi.CDI;
 
 import lombok.AllArgsConstructor;
 
-import org.westcoasthonorcamp.ma.service.data.Music;
-import org.westcoasthonorcamp.ma.service.data.Schedule;
+import org.westcoasthonorcamp.ma.common.data.Music;
+import org.westcoasthonorcamp.ma.common.data.Schedule;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
 
 @AllArgsConstructor

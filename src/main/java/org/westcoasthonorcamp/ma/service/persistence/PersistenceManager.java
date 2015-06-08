@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.westcoasthonorcamp.ma.service.data.BaseEntity;
+import org.westcoasthonorcamp.ma.common.data.BaseEntity;
 import org.westcoasthonorcamp.ma.service.enums.EntityEvent;
 
 /**

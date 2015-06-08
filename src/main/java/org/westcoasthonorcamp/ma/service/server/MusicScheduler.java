@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-import org.westcoasthonorcamp.ma.service.data.Schedule;
+import org.westcoasthonorcamp.ma.common.data.Schedule;
 import org.westcoasthonorcamp.ma.service.info.MusicInfo;
 import org.westcoasthonorcamp.ma.service.info.StandardMusic;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;

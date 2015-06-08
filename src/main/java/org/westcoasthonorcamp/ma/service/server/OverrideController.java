@@ -13,7 +13,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
-import org.westcoasthonorcamp.ma.service.data.Music;
+import org.westcoasthonorcamp.ma.common.data.Music;
 import org.westcoasthonorcamp.ma.service.info.OverrideMusic;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
 

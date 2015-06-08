@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import org.westcoasthonorcamp.ma.service.data.Music;
+import org.westcoasthonorcamp.ma.common.data.Music;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
 
 /**

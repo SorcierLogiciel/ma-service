@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.westcoasthonorcamp.ma.service.data.Music;
-import org.westcoasthonorcamp.ma.service.data.Schedule;
+import org.westcoasthonorcamp.ma.common.data.Music;
+import org.westcoasthonorcamp.ma.common.data.Schedule;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
 import org.westcoasthonorcamp.ma.service.server.MusicScheduler;
 
