@@ -21,7 +21,13 @@ public class StandardMusic implements MusicInfo
 	private final int scheduleId;
 	
 	@Override
-	public int getId()
+	public int getMusicId()
+	{
+		return musicId;
+	}
+	
+	@Override
+	public int getScheduleId()
 	{
 		return scheduleId;
 	}
@@ -54,7 +60,7 @@ public class StandardMusic implements MusicInfo
 	}
 	
 	@Override
-	public boolean getOverride()
+	public boolean isOverride()
 	{
 		return false;
 	}

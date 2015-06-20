@@ -4,21 +4,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class OverrideMusic implements MusicInfo
 {
 	
 	private static final long serialVersionUID = -1502314817218315970L;
 	
 	private final Date start = new Date(System.currentTimeMillis() + 1000);
+	private final int musicId;
 	private final String location;
 	
-	public OverrideMusic(String location)
+	@Override
+	public int getMusicId()
 	{
-		this.location = location;
+		return musicId;
 	}
 	
 	@Override
-	public int getId()
+	public int getScheduleId()
 	{
 		return 0;
 	}
@@ -36,7 +41,7 @@ public class OverrideMusic implements MusicInfo
 	}
 
 	@Override
-	public boolean getOverride()
+	public boolean isOverride()
 	{
 		return true;
 	}

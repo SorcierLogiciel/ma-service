@@ -21,12 +21,15 @@ import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 import org.westcoasthonorcamp.ma.common.data.Schedule;
+import org.westcoasthonorcamp.ma.service.event.Start;
+import org.westcoasthonorcamp.ma.service.event.Stop;
 import org.westcoasthonorcamp.ma.service.info.MusicInfo;
 import org.westcoasthonorcamp.ma.service.info.StandardMusic;
 import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
@@ -37,6 +40,9 @@ import org.westcoasthonorcamp.ma.service.persistence.PersistenceManager;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class MusicScheduler
 {
+	
+	@Inject
+	private BeanManager bm;
 	
 	@Inject
 	private PersistenceManager pm;
@@ -64,7 +70,7 @@ public class MusicScheduler
 			Date nextEvent = info.getNextEvent();
 			if(nextEvent != null && nextEvent.after(new Date()))
 			{
-				timerMap.put(info.getId(), timerService.createSingleActionTimer(nextEvent, new TimerConfig(info, false)));				
+				timerMap.put(info.getScheduleId(), timerService.createSingleActionTimer(nextEvent, new TimerConfig(info, false)));				
 			}
 		}
 	}
@@ -73,8 +79,11 @@ public class MusicScheduler
 	{
 		if(player != null)
 		{
+			
+			bm.fireEvent(new Stop(true));
 			player.close();
 			player = null;
+			
 		}
 	}
 	
@@ -91,21 +100,21 @@ public class MusicScheduler
 	private void startMusic(Timer timer)
 	{
 
-		MusicInfo info = (MusicInfo)timer.getInfo();
-		timerMap.remove(info.getId());
+		final MusicInfo info = (MusicInfo)timer.getInfo();
+		timerMap.remove(info.getScheduleId());
 		final Path location = info.getLocation();
 		if(location != null)
 		{
 			
 			registerMusic(info);
-			if(player == null || player.isComplete() || info.getOverride())
+			if(player == null || player.isComplete() || info.isOverride())
 			{
 				
 				if(player != null)
 				{
 					player.close();
 				}
-					
+
 				playerExecutor.execute(new Runnable()
 				{
 					
@@ -115,10 +124,19 @@ public class MusicScheduler
 					
 						try
 						{
+							
+							long startTime = System.currentTimeMillis() + 3000;
+							bm.fireEvent(new Start(info.getMusicId(), startTime, info.isOverride()));
+							while(startTime > System.currentTimeMillis())
+							{
+								Thread.sleep(10);
+							}
 							player = new Player(Files.newInputStream(location));
 							player.play();
+							bm.fireEvent(new Stop(false));
+							
 						}
-						catch(JavaLayerException | IOException e)
+						catch(JavaLayerException | IOException | InterruptedException e)
 						{
 							System.out.println(String.format("Unable to play %s", location));
 						}

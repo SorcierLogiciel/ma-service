@@ -208,7 +208,7 @@ public class OverrideController
 									
 									Music music = musics.get(selectedMusic);
 									setText(music.getName(), "Now Playing");
-									ms.registerMusic(new OverrideMusic(music.getLocation()));
+									ms.registerMusic(new OverrideMusic(music.getId(), music.getLocation()));
 									
 								}
 								break;

@@ -7,12 +7,14 @@ import java.util.Date;
 public interface MusicInfo extends Serializable
 {
 	
-	int getId();
+	int getMusicId();
+	
+	int getScheduleId();
 	
 	Path getLocation();
 	
 	Date getNextEvent();
 	
-	boolean getOverride();
+	boolean isOverride();
 	
 }
